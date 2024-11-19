@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:westernsun/screens/bottom_navigation.dart';
 import 'package:westernsun/screens/login_screen.dart';
 
 class IntroScreen extends StatelessWidget {

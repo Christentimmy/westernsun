@@ -4,6 +4,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:westernsun/screens/alt_home_screen.dart';
 import 'package:westernsun/screens/favorite_screen.dart';
 import 'package:westernsun/screens/my_orders_screen.dart';
+import 'package:westernsun/screens/profile_screen.dart';
 
 class BottomNavigationScreen extends StatelessWidget {
   BottomNavigationScreen({super.key});
@@ -14,7 +15,7 @@ class BottomNavigationScreen extends StatelessWidget {
     const AltHomeScreen(),
     MyOrdersScreen(),
     FavoriteScreen(),
-    Container(color: Colors.tealAccent),
+    ProfileScreen()
   ];
 
   @override
