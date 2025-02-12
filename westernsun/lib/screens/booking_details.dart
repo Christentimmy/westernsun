@@ -47,18 +47,18 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
               },
 
               onSuccess: (paystackCallback) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      'Transaction Successful::::${paystackCallback.reference}',
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    backgroundColor: Colors.brown,
-                  ),
-                );
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //   SnackBar(
+                //     content: Text(
+                //       'Transaction Successful::::${paystackCallback.reference}',
+                //       style: const TextStyle(
+                //         color: Colors.black,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //     backgroundColor: Colors.brown,
+                //   ),
+                // );
                 Get.to(() => SuccessfulPaymentScreen(reference: paystackCallback.reference,));
                 
               },
@@ -119,13 +119,13 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                 const SizedBox(height: 10),
                 contactDetailsCard(),
                 const SizedBox(height: 20),
-                const Text(
-                  "Contact Details",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
+                // const Text(
+                //   "Contact Details",
+                //   style: TextStyle(
+                //     fontWeight: FontWeight.bold,
+                //     fontSize: 14,
+                //   ),
+                // ),
                 const SizedBox(height: 10),
                 specialRequestCard(),
               ],

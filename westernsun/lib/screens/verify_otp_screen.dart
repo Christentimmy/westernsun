@@ -38,7 +38,7 @@ class VerifyPhoneNumberScreen extends StatelessWidget {
           children: [
             const Center(
               child: Text(
-                "Verify Phone Number",
+                "Verify Email Address",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class VerifyPhoneNumberScreen extends StatelessWidget {
               ),
             ),
             const Text(
-              "Kindly enter the OTP sent to your phone number",
+              "Kindly enter the OTP sent to your email address",
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 12,

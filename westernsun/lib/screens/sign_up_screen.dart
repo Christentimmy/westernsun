@@ -188,25 +188,26 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         // const Spacer(),
                         SizedBox(height: Get.height * 0.05),
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(() => LoginScreen());
-                          },
-                          child: RichText(
-                            text: const TextSpan(
-                              children: [
-                                TextSpan(text: "Already have account? "),
-                                TextSpan(
-                                  text: "Login",
-                                  style: TextStyle(
-                                    color: Colors.brown,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Already have account? "),
+                            GestureDetector(
+                              onTap: () {
+                                  Get.to(() => LoginScreen());
+                              },
+                              child: const Text(
+                                "Login",
+                                 style: TextStyle(
+                                  color: Colors.brown,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
+                       
                       ],
                     ),
                   ),

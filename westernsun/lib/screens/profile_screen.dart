@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:westernsun/screens/login_screen.dart';
+import 'package:westernsun/screens/privacy_policy_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -24,14 +26,14 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
+              const Text(
                 "Timmy Christen",
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
+              const Text(
                 "timmychris09@gmail.com",
                 style: TextStyle(
                   fontSize: 11,
@@ -41,35 +43,41 @@ class ProfileScreen extends StatelessWidget {
               ),
               SizedBox(height: Get.height * 0.05),
               ListTile(
-                leading: Icon(Icons.privacy_tip_rounded),
-                title: Text("Privacy & Policy"),
-                trailing: Icon(Icons.arrow_forward_ios),
+                leading: const Icon(Icons.privacy_tip_rounded),
+                title: const Text("Privacy & Policy"),
+                trailing: const Icon(Icons.arrow_forward_ios),
                 onTap: (){
-                  
+                  Get.to(()=> const PrivacyPolicyScreen());
                 },
               ),
-              ListTile(
+              const ListTile(
                 leading: Icon(Icons.notifications_active),
                 title: Text("Notification"),
                 trailing: Icon(Icons.arrow_forward_ios),
               ),
               ListTile(
-                leading: Icon(Icons.verified_user_sharp),
-                title: Text("License"),
-                trailing: Icon(Icons.arrow_forward_ios),
+                leading: const Icon(Icons.verified_user_sharp),
+                title: const Text("License"),
+                onTap: (){
+                  showLicensePage(context: context);
+                },
+                trailing: const Icon(Icons.arrow_forward_ios),
               ),
               ListTile(
-                leading: Icon(
+                onTap: (){
+                  Get.offAll(()=> const LoginScreen());
+                },
+                leading: const Icon(
                   Icons.logout,
                   color: Colors.red,
                 ),
-                title: Text(
+                title: const Text(
                   "Logout",
                   style: TextStyle(
                     color: Colors.red,
                   ),
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.red,
                 ),

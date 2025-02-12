@@ -20,12 +20,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Westersun',
+        themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
         colorScheme: const ColorScheme.dark(
           primary: Colors.white,
-          onPrimary: Colors.black, // Color for buttons or primary elements
+          onPrimary: Colors.black, 
           surface: Colors.black,
           secondary: Colors.grey,
         ),

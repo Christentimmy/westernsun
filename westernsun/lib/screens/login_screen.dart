@@ -134,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(height: 15),
                         CustomButton(
                           ontap: () {
-                            Get.to(()=> BottomNavigationScreen());
+                            Get.to(() => BottomNavigationScreen());
                           },
                           child: const Text(
                             "Login",
@@ -145,25 +145,36 @@ class LoginScreen extends StatelessWidget {
                         ),
                         // const Spacer(),
                         SizedBox(height: Get.height * 0.05),
-                        GestureDetector(
-                          onTap: (){
-                            Get.to(()=> SignUpScreen());
-                          },
-                          child: RichText(
-                            text: const TextSpan(
-                              children: [
-                                TextSpan(text: "Don't have account? "),
-                                TextSpan(
-                                  text: "Register",
-                                  style: TextStyle(
-                                    color: Colors.brown,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Don't have account? "),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => SignUpScreen());
+                              },
+                              child: const Text(
+                                "Register",
+                                 style: TextStyle(
+                                  color: Colors.brown,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
+                        // RichText(
+                        //   text: const TextSpan(
+                        //     children: [
+                        //       TextSpan(text: "Don't have account? "),
+                        //       TextSpan(
+                        //         text: "Register",
+                               
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
