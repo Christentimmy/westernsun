@@ -1,12 +1,23 @@
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
+import 'package:westernsun/controller/auth_controller.dart';
 import 'package:westernsun/controller/timer_controller.dart';
 import 'package:westernsun/screens/bottom_navigation.dart';
+import 'package:westernsun/widgets/snack_bar.dart';
 
 class VerifyPhoneNumberScreen extends StatelessWidget {
-  VerifyPhoneNumberScreen({super.key});
+  final EmailOTP myauth;
+  final String email;
+  VerifyPhoneNumberScreen({
+    super.key,
+    required this.myauth,
+    required this.email,
+  });
   final _timeController = Get.put(TimerController());
+  final _authController = Get.find<AuthController>();
+  final _otpController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +57,9 @@ class VerifyPhoneNumberScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Text(
-              "Kindly enter the OTP sent to your email address",
-              style: TextStyle(
+            Text(
+              "Kindly enter the OTP sent to $email",
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 12,
               ),
@@ -59,7 +70,11 @@ class VerifyPhoneNumberScreen extends StatelessWidget {
                 closeKeyboardWhenCompleted: true,
                 onCompleted: (value) {
                   // Get.to(()=> CreateProfileScreen());
-                  Get.to(() => BottomNavigationScreen());
+                  if (EmailOTP.verifyOTP(otp: _otpController.text)) {
+                    Get.to(() => BottomNavigationScreen());
+                  } else {
+                    CustomSnackbar.showError("Error", "Invalid OTP");
+                  }
                 },
                 focusedPinTheme: PinTheme(
                   height: 60,
@@ -91,8 +106,9 @@ class VerifyPhoneNumberScreen extends StatelessWidget {
                 ),
                 Obx(
                   () => GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       _timeController.startTimer();
+                      await _authController.resendOTP(email);
                     },
                     child: Text(
                       _timeController.secondsLeft.value <= 0

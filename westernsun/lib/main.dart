@@ -2,10 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:westernsun/controller/auth_controller.dart';
+import 'package:westernsun/controller/retreive_controller.dart';
 import 'package:westernsun/firebase_options.dart';
 import 'package:westernsun/screens/intro_screen.dart';
 
 void main() async {
+  Get.put(AuthController());
+  Get.put(Retrieve());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
@@ -20,13 +24,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Westersun',
-        themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
         colorScheme: const ColorScheme.dark(
           primary: Colors.white,
-          onPrimary: Colors.black, 
+          onPrimary: Colors.black,
           surface: Colors.black,
           secondary: Colors.grey,
         ),
