@@ -40,13 +40,13 @@ class SignUpScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: Get.height * 0.15),
+              SizedBox(height: Get.height * 0.07),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                   child: Container(
-                    height: Get.height * 0.75,
+                    height: Get.height * 0.84,
                     width: Get.width,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 15,
@@ -123,9 +123,29 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 15),
                           TextFormField(
+                            validator: (value) {
+                              if (value?.isEmpty == true) {
+                                return "field required";
+                              }
+                              return null;
+                            },
                             controller: _emailController,
                             style: const TextStyle(fontSize: 13),
                             decoration: InputDecoration(
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.red,
+                                ),
+                              ),
                               hintText: "Email",
                               hintStyle: const TextStyle(
                                 fontSize: 10,
@@ -149,12 +169,32 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 15),
                           TextFormField(
+                            validator: (value) {
+                              if (value?.isEmpty == true) {
+                                return "field required";
+                              }
+                              return null;
+                            },
                             controller: _phoneNumberController,
                             keyboardType: TextInputType.number,
                             style: const TextStyle(
                               fontSize: 13,
                             ),
                             decoration: InputDecoration(
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.red,
+                                ),
+                              ),
                               hintText: "Phone Number",
                               hintStyle: const TextStyle(
                                 fontSize: 10,
@@ -178,12 +218,32 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 15),
                           TextFormField(
+                            validator: (value) {
+                              if (value?.isEmpty == true) {
+                                return "field required";
+                              }
+                              return null;
+                            },
                             controller: _passwordController,
                             obscureText: true,
                             style: const TextStyle(
                               fontSize: 13,
                             ),
                             decoration: InputDecoration(
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.red,
+                                ),
+                              ),
                               hintText: "Password",
                               hintStyle: const TextStyle(
                                 fontSize: 10,
@@ -206,29 +266,31 @@ class SignUpScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 15),
-                          CustomButton(
-                            ontap: () async {
-                              if (_formKey.currentState!.validate()) {
-                                await _authController.createAccount(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                  phoneNumber:
-                                      int.parse(_phoneNumberController.text),
-                                  userName: _fullNameController.text,
-                                  context: context,
-                                );
-                              }
-                            },
-                            child: _authController.isLoading.value
-                                ? const CircularProgressIndicator(
-                                    color: Colors.white,
-                                  )
-                                : const Text(
-                                    "Register",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                          Obx(
+                            () => CustomButton(
+                              ontap: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  await _authController.createAccount(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                    phoneNumber:
+                                        int.parse(_phoneNumberController.text),
+                                    userName: _fullNameController.text,
+                                    context: context,
+                                  );
+                                }
+                              },
+                              child: _authController.isLoading.value
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )
+                                  : const Text(
+                                      "Register",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
+                            ),
                           ),
                           // const Spacer(),
                           SizedBox(height: Get.height * 0.05),

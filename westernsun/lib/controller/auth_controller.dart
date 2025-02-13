@@ -12,7 +12,7 @@ import 'package:westernsun/widgets/snack_bar.dart';
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   final _retreiveController = Get.put(Retrieve());
-  
+
 
   Future<void> createAccount({
     required String email,
@@ -21,12 +21,6 @@ class AuthController extends GetxController {
     required String userName,
     required BuildContext context,
   }) async {
-    EmailOTP.config(
-      appEmail: "timmychris09@gmail.com",
-      appName: "Email OTP",
-      otpLength: 4,
-      otpType: OTPType.numeric,
-    );
     isLoading.value = true;
     Stopwatch stopwatch = Stopwatch()..start();
     try {
@@ -48,14 +42,7 @@ class AuthController extends GetxController {
           .set(userData.toMap());
       debugPrint("firebase done");
       await _retreiveController.fetchUserDetails();
-      bool result = await EmailOTP.sendOTP(email: email);
-      if (result) {
-        print("OTP sent successfully!");
-      }
-      Get.to(() => VerifyPhoneNumberScreen(
-            myauth: EmailOTP(),
-            email: email,
-          ));
+      Get.offAll(()=> BottomNavigationScreen());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         debugPrint('The password provided is too weak.');

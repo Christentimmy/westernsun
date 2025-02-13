@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:westernsun/controller/retreive_controller.dart';
 import 'package:westernsun/models/room_model.dart';
 import 'package:westernsun/resources/all_list_used.dart';
 import 'package:westernsun/screens/room_details_screen.dart';
@@ -15,6 +16,8 @@ class AltHomeScreen extends StatefulWidget {
 class _AltHomeScreenState extends State<AltHomeScreen> {
   final _pageController = PageController();
   final RxBool _isloading = false.obs;
+
+  final _retreiveController = Get.find<Retrieve>();
 
   void onClicked(int index) async {
     setState(() {
@@ -53,15 +56,18 @@ class _AltHomeScreenState extends State<AltHomeScreen> {
                     backgroundImage: AssetImage("assets/images/1.jpg"),
                   ),
                   const SizedBox(width: 10),
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Hello There!", style: TextStyle(fontSize: 10)),
-                      Text(
-                        "Christen Timmy",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
+                      const Text("Hello There!",
+                          style: TextStyle(fontSize: 10)),
+                      Obx(
+                        () => Text(
+                          _retreiveController.userDetails.value?.username ?? "",
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],

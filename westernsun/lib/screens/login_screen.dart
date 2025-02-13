@@ -1,12 +1,17 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:westernsun/controller/auth_controller.dart';
 import 'package:westernsun/screens/bottom_navigation.dart';
 import 'package:westernsun/screens/my_orders_screen.dart';
 import 'package:westernsun/screens/sign_up_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+  final _authController = Get.find<AuthController>();
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,130 +57,186 @@ class LoginScreen extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Image.asset(
-                            "assets/images/login.png",
-                            width: 120,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                        TextFormField(
-                          style: const TextStyle(
-                            fontSize: 13,
-                          ),
-                          decoration: InputDecoration(
-                            hintText: "Email",
-                            hintStyle: const TextStyle(
-                              fontSize: 10,
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.asset(
+                              "assets/images/login.png",
+                              width: 120,
+                              fit: BoxFit.cover,
                             ),
-                            prefixIcon: const Icon(Icons.email),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                width: 1,
-                                color: Colors.grey,
+                          ),
+                          const SizedBox(height: 15),
+                          TextFormField(
+                            validator: (value) {
+                              if (value?.isEmpty == true) {
+                                return "field required";
+                              }
+                              return null;
+                            },
+                            controller: _emailController,
+                            style: const TextStyle(
+                              fontSize: 13,
+                            ),
+                            decoration: InputDecoration(
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.red,
+                                ),
                               ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                width: 1,
-                                color: Colors.grey,
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.red,
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                        TextFormField(
-                          obscureText: true,
-                          style: const TextStyle(
-                            fontSize: 13,
-                          ),
-                          decoration: InputDecoration(
-                            hintText: "Password",
-                            hintStyle: const TextStyle(
-                              fontSize: 10,
-                            ),
-                            prefixIcon: const Icon(Icons.lock),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                width: 1,
-                                color: Colors.grey,
+                              hintText: "Email",
+                              hintStyle: const TextStyle(
+                                fontSize: 10,
                               ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                width: 1,
-                                color: Colors.grey,
+                              prefixIcon: const Icon(Icons.email),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.grey,
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Forgot Password? ",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.brown,
-                                fontSize: 12,
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        CustomButton(
-                          ontap: () {
-                            Get.to(() => BottomNavigationScreen());
-                          },
-                          child: const Text(
-                            "Login",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        // const Spacer(),
-                        SizedBox(height: Get.height * 0.05),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("Don't have account? "),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(() => SignUpScreen());
-                              },
-                              child: const Text(
-                                "Register",
-                                 style: TextStyle(
-                                  color: Colors.brown,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.grey,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                        // RichText(
-                        //   text: const TextSpan(
-                        //     children: [
-                        //       TextSpan(text: "Don't have account? "),
-                        //       TextSpan(
-                        //         text: "Register",
-                               
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                      ],
+                          ),
+                          const SizedBox(height: 15),
+                          TextFormField(
+                            validator: (value) {
+                              if (value?.isEmpty == true) {
+                                return "field required";
+                              }
+                              return null;
+                            },
+                            controller: _passwordController,
+                            obscureText: true,
+                            style: const TextStyle(
+                              fontSize: 13,
+                            ),
+                            decoration: InputDecoration(
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              hintText: "Password",
+                              hintStyle: const TextStyle(
+                                fontSize: 10,
+                              ),
+                              prefixIcon: const Icon(Icons.lock),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Forgot Password? ",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.brown,
+                                  fontSize: 12,
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          Obx(
+                            () => CustomButton(
+                              ontap: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  await _authController.login(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  );
+                                }
+                              },
+                              child: _authController.isLoading.value
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )
+                                  : const Text(
+                                      "Login",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                            ),
+                          ),
+                          // const Spacer(),
+                          SizedBox(height: Get.height * 0.05),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text("Don't have account? "),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(() => SignUpScreen());
+                                },
+                                child: const Text(
+                                  "Register",
+                                  style: TextStyle(
+                                    color: Colors.brown,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          // RichText(
+                          //   text: const TextSpan(
+                          //     children: [
+                          //       TextSpan(text: "Don't have account? "),
+                          //       TextSpan(
+                          //         text: "Register",
+
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

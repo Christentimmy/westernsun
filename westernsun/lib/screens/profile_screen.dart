@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:westernsun/controller/retreive_controller.dart';
 import 'package:westernsun/screens/login_screen.dart';
 import 'package:westernsun/screens/privacy_policy_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+
+  final _retreiveController = Get.find<Retrieve>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +29,15 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              const Text(
-                "Timmy Christen",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Text(
-                "timmychris09@gmail.com",
-                style: TextStyle(
-                  fontSize: 11,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
+             
+              Obx(
+                () => Text(
+                  _retreiveController.userDetails.value?.email ?? "",
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               SizedBox(height: Get.height * 0.05),
@@ -46,8 +45,8 @@ class ProfileScreen extends StatelessWidget {
                 leading: const Icon(Icons.privacy_tip_rounded),
                 title: const Text("Privacy & Policy"),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: (){
-                  Get.to(()=> const PrivacyPolicyScreen());
+                onTap: () {
+                  Get.to(() => const PrivacyPolicyScreen());
                 },
               ),
               const ListTile(
@@ -58,14 +57,14 @@ class ProfileScreen extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.verified_user_sharp),
                 title: const Text("License"),
-                onTap: (){
+                onTap: () {
                   showLicensePage(context: context);
                 },
                 trailing: const Icon(Icons.arrow_forward_ios),
               ),
               ListTile(
-                onTap: (){
-                  Get.offAll(()=> const LoginScreen());
+                onTap: () {
+                  Get.offAll(() => LoginScreen());
                 },
                 leading: const Icon(
                   Icons.logout,
